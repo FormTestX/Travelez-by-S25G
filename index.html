@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travelez - On Demand</title>
+    <title>Travelez | On-Demand Local Guides</title>
     <style>
         :root {
             --bg-color: #F8F9FA;
@@ -15,87 +14,58 @@
             --text-muted: #6C757D;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 
         body {
-            background-color: #D6D6D6;
-            display: flex;
-            justify-content: center;
-            padding: 20px 0;
-        }
-
-        .app-shell {
-            width: 100%;
-            max-width: 414px;
-            height: 880px;
             background-color: var(--bg-color);
-            border-radius: 40px;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-            scrollbar-width: none;
+            color: var(--text-main);
+            line-height: 1.6;
         }
-        .app-shell::-webkit-scrollbar { display: none; }
 
-        /* --- Header & On-Demand Welcome --- */
+        /* Container to keep content centered on large screens */
+        .content-wrapper {
+            max-width: 500px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding-bottom: 100px; /* Space for fixed nav */
+            position: relative;
+            background: white;
+        }
+
+        /* Header */
         .header {
             padding: 40px 24px 20px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
+        .welcome-section h1 { font-size: 14px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+        .welcome-section h2 { font-size: 24px; color: var(--primary-dark); line-height: 1.2; margin-top: 4px; }
+        .notif-bell { background: var(--accent-gold); padding: 12px; border-radius: 50%; cursor: pointer; }
 
-        .welcome-section h1 {
-            font-size: 16px;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .welcome-section h2 {
-            font-size: 24px;
-            color: var(--primary-dark);
-            line-height: 1.2;
-            max-width: 250px;
-        }
-
-        .notif-bell {
-            background: var(--accent-gold);
-            padding: 12px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
-        }
-
-        /* --- Search bar --- */
+        /* Search */
         .search-container { padding: 0 24px 25px; }
         .search-bar {
-            background: white;
+            background: #F1F3F4;
             padding: 16px 20px;
             border-radius: 30px;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid #eee;
         }
-        .search-bar input { border: none; outline: none; width: 100%; font-size: 15px; color: var(--text-main); }
+        .search-bar input { border: none; background: none; outline: none; width: 100%; font-size: 16px; }
 
-        /* --- Quick Category Grid --- */
+        /* Category Grid */
         .categories {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             padding: 0 24px 30px;
             gap: 12px;
         }
-        .cat-item { text-align: center; }
+        .cat-item { text-align: center; cursor: pointer; }
         .cat-box {
             background: var(--primary-dark);
-            height: 75px;
+            height: 70px;
             border-radius: 20px;
             display: flex;
             justify-content: center;
@@ -107,37 +77,18 @@
         .cat-item span { font-size: 13px; font-weight: 600; color: var(--primary-dark); }
         .more-box { background: #E0E0E0; color: #555; }
 
-        /* --- On-Demand Guide Card --- */
-        .section-label {
-            padding: 0 24px 15px;
-            font-size: 19px;
-            font-weight: 800;
-            color: var(--primary-dark);
-            letter-spacing: -0.5px;
-        }
-
+        /* Guide Card */
+        .section-label { padding: 0 24px 15px; font-size: 18px; font-weight: 800; color: var(--primary-dark); }
         .guide-card {
             margin: 0 24px 30px;
             background: white;
-            border-radius: 30px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border: 1px solid #f0f0f0;
         }
-
-        .guide-img-container {
-            width: 100%;
-            height: 240px;
-            position: relative;
-        }
-
-        .guide-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
-        }
-
+        .guide-img-container { width: 100%; height: 220px; position: relative; }
+        .guide-img { width: 100%; height: 100%; object-fit: cover; }
         .status-badge {
             position: absolute;
             top: 15px;
@@ -152,74 +103,39 @@
             align-items: center;
             gap: 6px;
         }
+        .dot { width: 8px; height: 8px; background: var(--online-green); border-radius: 50%; }
+        .guide-details { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .guide-meta h4 { font-size: 18px; color: var(--primary-dark); }
+        .book-now-btn { background: var(--primary-dark); color: white; border: none; padding: 12px 18px; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
-        .dot { width: 8px; height: 8px; background: var(--online-green); border-radius: 50%; display: inline-block; }
-
-        .guide-details {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .guide-meta h4 { font-size: 18px; color: var(--primary-dark); margin-bottom: 4px; }
-        .guide-meta p { font-size: 13px; color: var(--text-muted); }
-
-        .book-now-btn {
-            background: var(--primary-dark);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* --- Active Chats Preview --- */
-        .chat-list { padding: 0 24px 100px; }
-        .chat-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-        }
-        .chat-avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-        .chat-body { flex: 1; }
-        .chat-body h5 { font-size: 14px; color: var(--primary-dark); }
-        .chat-body p { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
-        .chat-meta { text-align: right; }
-        .chat-time { font-size: 11px; color: #999; }
-
-        /* --- Bottom Nav Bar --- */
+        /* Bottom Nav (Fixed to Viewport) */
         .nav-bar {
-            position: absolute;
-            bottom: 25px;
-            left: 24px;
-            right: 24px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 460px;
             background: var(--primary-dark);
             height: 70px;
             border-radius: 35px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 0 10px;
+            z-index: 100;
         }
-        .nav-item-bottom { color: rgba(255,255,255,0.5); font-size: 22px; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
+        .nav-item-bottom { color: rgba(255,255,255,0.5); font-size: 20px; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
         .nav-item-bottom.active { color: white; }
-        .nav-item-bottom span { font-size: 10px; margin-top: 4px; font-weight: 500; }
+        .nav-item-bottom span { font-size: 10px; margin-top: 4px; }
 
     </style>
 </head>
 <body>
 
-<div class="app-shell">
+<div class="content-wrapper">
     <header class="header">
         <div class="welcome-section">
-            <h1>WELCOME TO KUALA LUMPUR!</h1>
+            <h1>Welcome to Kuala Lumpur!</h1>
             <h2>Ready to take a tour?</h2>
         </div>
         <div class="notif-bell">🔔</div>
@@ -233,60 +149,24 @@
     </div>
 
     <div class="categories">
-        <div class="cat-item">
-            <div class="cat-box">💬</div>
-            <span>Chat</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-box">🏖️</div>
-            <span>Resort</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-box">🏨</div>
-            <span>Hotel</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-box more-box">•••</div>
-            <span>More</span>
-        </div>
+        <div class="cat-item"><div class="cat-box">💬</div><span>Chat</span></div>
+        <div class="cat-item"><div class="cat-box">🏖️</div><span>Resort</span></div>
+        <div class="cat-item"><div class="cat-box">🏨</div><span>Hotel</span></div>
+        <div class="cat-item"><div class="cat-box more-box">•••</div><span>More</span></div>
     </div>
 
     <h3 class="section-label">AVAILABLE GUIDES NOW</h3>
     <div class="guide-card">
         <div class="guide-img-container">
             <div class="status-badge"><span class="dot"></span> Online Now</div>
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800" class="guide-img" alt="Professional Guide">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800" class="guide-img">
         </div>
         <div class="guide-details">
             <div class="guide-meta">
                 <h4>Ahmad, KL Specialist</h4>
                 <p>📍 Bukit Bintang • 4.9 ⭐</p>
             </div>
-            <button class="book-now-btn"><a href="booking.html">BOOK INSTANTLY</a></button>
-        </div>
-    </div>
-
-    <h3 class="section-label">Active Chats</h3>
-    <div class="chat-list">
-        <div class="chat-row">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100" class="chat-avatar">
-            <div class="chat-body">
-                <h5>Sarah (London Guide)</h5>
-                <p>I'll be at the arrivals hall at 2 PM...</p>
-            </div>
-            <div class="chat-meta">
-                <span class="chat-time">1:03 PM</span>
-            </div>
-        </div>
-        <div class="chat-row">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="chat-avatar">
-            <div class="chat-body">
-                <h5>Kenji (Kyoto Expert)</h5>
-                <p>The temple tour is confirmed!</p>
-            </div>
-            <div class="chat-meta">
-                <span class="chat-time">Yesterday</span>
-            </div>
+            <button class="book-now-btn">BOOK NOW</button>
         </div>
     </div>
 
@@ -300,305 +180,3 @@
 
 </body>
 </html>
-
-html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travelez - On Demand</title>
-    <style>
-        :root {
-            --bg-color: #F8F9FA;
-            --primary-dark: #003B2D; 
-            --accent-gold: #FFC107;
-            --online-green: #28A745;
-            --text-main: #1A1A1A;
-            --text-muted: #6C757D;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        body {
-            background-color: #D6D6D6;
-            display: flex;
-            justify-content: center;
-            padding: 20px 0;
-        }
-
-        .app-shell {
-            width: 100%;
-            max-width: 414px;
-            height: 880px;
-            background-color: var(--bg-color);
-            border-radius: 40px;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-            scrollbar-width: none;
-        }
-        .app-shell::-webkit-scrollbar { display: none; }
-
-        /* --- Header & On-Demand Welcome --- */
-        .header {
-            padding: 40px 24px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .welcome-section h1 {
-            font-size: 16px;
-            color: var(--text-muted);
-            font-weight: 500;
-            margin-bottom: 4px;
-        }
-
-        .welcome-section h2 {
-            font-size: 24px;
-            color: var(--primary-dark);
-            line-height: 1.2;
-            max-width: 250px;
-        }
-
-        .notif-bell {
-            background: var(--accent-gold);
-            padding: 12px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
-        }
-
-        /* --- Search bar --- */
-        .search-container { padding: 0 24px 25px; }
-        .search-bar {
-            background: white;
-            padding: 16px 20px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid #eee;
-        }
-        .search-bar input { border: none; outline: none; width: 100%; font-size: 15px; color: var(--text-main); }
-
-        /* --- Quick Category Grid --- */
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 0 24px 30px;
-            gap: 12px;
-        }
-        .cat-item { text-align: center; }
-        .cat-box {
-            background: var(--primary-dark);
-            height: 75px;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            margin-bottom: 8px;
-            color: white;
-        }
-        .cat-item span { font-size: 13px; font-weight: 600; color: var(--primary-dark); }
-        .more-box { background: #E0E0E0; color: #555; }
-
-        /* --- On-Demand Guide Card --- */
-        .section-label {
-            padding: 0 24px 15px;
-            font-size: 19px;
-            font-weight: 800;
-            color: var(--primary-dark);
-            letter-spacing: -0.5px;
-        }
-
-        .guide-card {
-            margin: 0 24px 30px;
-            background: white;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #f0f0f0;
-        }
-
-        .guide-img-container {
-            width: 100%;
-            height: 240px;
-            position: relative;
-        }
-
-        .guide-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .dot { width: 8px; height: 8px; background: var(--online-green); border-radius: 50%; display: inline-block; }
-
-        .guide-details {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .guide-meta h4 { font-size: 18px; color: var(--primary-dark); margin-bottom: 4px; }
-        .guide-meta p { font-size: 13px; color: var(--text-muted); }
-
-        .book-now-btn {
-            background: var(--primary-dark);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* --- Active Chats Preview --- */
-        .chat-list { padding: 0 24px 100px; }
-        .chat-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-        }
-        .chat-avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-        .chat-body { flex: 1; }
-        .chat-body h5 { font-size: 14px; color: var(--primary-dark); }
-        .chat-body p { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
-        .chat-meta { text-align: right; }
-        .chat-time { font-size: 11px; color: #999; }
-
-        /* --- Bottom Nav Bar --- */
-        .nav-bar {
-            position: absolute;
-            bottom: 25px;
-            left: 24px;
-            right: 24px;
-            background: var(--primary-dark);
-            height: 70px;
-            border-radius: 35px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0 10px;
-        }
-        .nav-item-bottom { color: rgba(255,255,255,0.5); font-size: 22px; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
-        .nav-item-bottom.active { color: white; }
-        .nav-item-bottom span { font-size: 10px; margin-top: 4px; font-weight: 500; }
-
-    </style>
-</head>
-<body>
-
-<div class="app-shell">
-    <header class="header">
-        <div class="welcome-section">
-            <h1>WELCOME TO KUALA LUMPUR!</h1>
-            <h2>Ready to take a tour?</h2>
-        </div>
-        <div class="notif-bell">🔔</div>
-    </header>
-
-    <div class="search-container">
-        <div class="search-bar">
-            <span>🔍</span>
-            <input type="text" placeholder="Search your destination here...">
-        </div>
-    </div>
-
-    <div class="categories">
-        <div class="cat-item">
-            <div class="cat-box">💬</div>
-            <span>Chat</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-box">🏖️</div>
-            <span>Resort</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-box">🏨</div>
-            <span>Hotel</span>
-        </div>
-        <div class="cat-item">
-            <div class="cat-box more-box">•••</div>
-            <span>More</span>
-        </div>
-    </div>
-
-    <h3 class="section-label">AVAILABLE GUIDES NOW</h3>
-    <div class="guide-card">
-        <div class="guide-img-container">
-            <div class="status-badge"><span class="dot"></span> Online Now</div>
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800" class="guide-img" alt="Professional Guide">
-        </div>
-        <div class="guide-details">
-            <div class="guide-meta">
-                <h4>Ahmad, KL Specialist</h4>
-                <p>📍 Bukit Bintang • 4.9 ⭐</p>
-            </div>
-            <button class="book-now-btn">BOOK INSTANTLY</button>
-        </div>
-    </div>
-
-    <h3 class="section-label">Active Chats</h3>
-    <div class="chat-list">
-        <div class="chat-row">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100" class="chat-avatar">
-            <div class="chat-body">
-                <h5>Sarah (London Guide)</h5>
-                <p>I'll be at the arrivals hall at 2 PM...</p>
-            </div>
-            <div class="chat-meta">
-                <span class="chat-time">1:03 PM</span>
-            </div>
-        </div>
-        <div class="chat-row">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="chat-avatar">
-            <div class="chat-body">
-                <h5>Kenji (Kyoto Expert)</h5>
-                <p>The temple tour is confirmed!</p>
-            </div>
-            <div class="chat-meta">
-                <span class="chat-time">Yesterday</span>
-            </div>
-        </div>
-    </div>
-
-    <nav class="nav-bar">
-        <a href="#" class="nav-item-bottom active">🏠<span>Home</span></a>
-        <a href="#" class="nav-item-bottom">🔍<span>Explore</span></a>
-        <a href="#" class="nav-item-bottom">🔖<span>Saved</span></a>
-        <a href="#" class="nav-item-bottom">👤<span>Profile</span></a>
-    </nav>
-</div>
-
-</body>
-</html>
-
