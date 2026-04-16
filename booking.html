@@ -16,7 +16,7 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 
-        body { background-color: var(--bg-color); }
+        body { background-color: #eee; }
 
         .content-wrapper {
             max-width: 500px;
@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* Hero Image - Full Width */
+        /* Hero Image */
         .guide-hero {
             width: 100%;
             height: 45vh;
@@ -34,9 +34,10 @@
         }
         .hero-img { width: 100%; height: 100%; object-fit: cover; }
         
+        /* Transparent Nav */
         .nav-overlay {
             position: absolute;
-            top: 20px;
+            top: 30px;
             left: 20px;
             right: 20px;
             display: flex;
@@ -53,33 +54,34 @@
             align-items: center;
             text-decoration: none;
             color: var(--primary-dark);
-            font-weight: bold;
+            font-size: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* Content Card */
+        /* Details Section */
         .booking-details {
-            padding: 30px 24px 140px;
+            padding: 35px 24px 140px;
             background: white;
-            border-radius: 30px 30px 0 0;
-            margin-top: -30px;
+            border-radius: 35px 35px 0 0;
+            margin-top: -35px;
             position: relative;
         }
 
-        .header-row { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; }
         .header-row h2 { font-size: 28px; color: var(--primary-dark); }
         .price { text-align: right; }
         .price .amt { font-size: 22px; font-weight: 800; color: var(--primary-dark); }
+        .price small { color: var(--text-muted); }
         
-        .stats { display: flex; gap: 10px; margin-bottom: 25px; }
-        .stat-box { flex: 1; background: #F1F3F4; padding: 12px; border-radius: 15px; text-align: center; }
-        .stat-box b { display: block; font-size: 15px; }
-        .stat-box small { font-size: 11px; color: var(--text-muted); }
+        .stats { display: flex; gap: 10px; margin-bottom: 30px; }
+        .stat-box { flex: 1; background: #F1F3F4; padding: 15px 10px; border-radius: 18px; text-align: center; }
+        .stat-box b { display: block; font-size: 15px; color: var(--primary-dark); }
+        .stat-box small { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
-        .section-title { font-size: 18px; margin-bottom: 10px; color: var(--primary-dark); font-weight: 700; }
-        .bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; }
+        .section-title { font-size: 17px; margin-bottom: 12px; color: var(--primary-dark); font-weight: 800; }
+        .bio { font-size: 15px; color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; }
 
-        /* Map Placeholder */
+        /* Map Preview */
         .map-box {
             width: 100%;
             height: 160px;
@@ -91,9 +93,9 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        .map-label { background: white; padding: 8px 15px; border-radius: 10px; font-weight: 600; font-size: 13px; }
+        .map-label { background: white; padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 13px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-        /* Bottom Action Bar */
+        /* Bottom Fixed Bar */
         .action-bar {
             position: fixed;
             bottom: 0;
@@ -105,10 +107,11 @@
             padding: 20px 24px 40px;
             display: flex;
             gap: 15px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #f0f0f0;
+            z-index: 100;
         }
-        .chat-btn { width: 65px; height: 60px; border: 2.5px solid var(--primary-dark); border-radius: 18px; font-size: 24px; background: none; }
-        .book-btn { flex: 1; background: var(--primary-dark); color: white; border: none; border-radius: 18px; font-weight: 800; font-size: 16px; }
+        .chat-btn { width: 65px; height: 60px; border: 2.5px solid var(--primary-dark); border-radius: 18px; font-size: 24px; background: none; cursor: pointer; }
+        .book-btn { flex: 1; background: var(--primary-dark); color: white; border: none; border-radius: 18px; font-weight: 800; font-size: 16px; cursor: pointer; }
 
     </style>
 </head>
@@ -117,7 +120,7 @@
 <div class="content-wrapper">
     <div class="guide-hero">
         <div class="nav-overlay">
-            <a href="#" class="circle-btn">←</a>
+            <a href="index.html" class="circle-btn">←</a>
             <div class="circle-btn">❤</div>
         </div>
         <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800" class="hero-img">
@@ -126,8 +129,8 @@
     <div class="booking-details">
         <div class="header-row">
             <div>
-                <h2>Ahmad Z.</h2>
-                <p style="color:var(--text-muted)">📍 Bukit Bintang, KL</p>
+                <h2>Aqil G.</h2>
+                <p style="color:var(--text-muted); font-size: 14px;">📍 Bukit Bintang, KL</p>
             </div>
             <div class="price">
                 <div class="amt">RM 85</div>
@@ -138,11 +141,11 @@
         <div class="stats">
             <div class="stat-box"><b>4.9 ⭐</b><small>Rating</small></div>
             <div class="stat-box"><b>120+</b><small>Trips</small></div>
-            <div class="stat-box"><b>Malay, EN</b><small>Languages</small></div>
+            <div class="stat-box"><b>Malay, EN</b><small>Lang</small></div>
         </div>
 
         <h3 class="section-title">About Your Guide</h3>
-        <p class="bio">Expert in KL street food and heritage. I can meet you anywhere in the Golden Triangle within 10-15 minutes of booking.</p>
+        <p class="bio">I specialize in hidden gems and local culture. Whether you want a quick food tour or a history walk, I can be at your location in 10 minutes.</p>
 
         <h3 class="section-title">Meeting Point</h3>
         <div class="map-box">
