@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelez - Book Your Guide</title>
+    <style>
+        :root {
+            --bg-color: #F8F9FA;
+            --primary-dark: #003B2D; 
+            --accent-gold: #FFC107;
+            --online-green: #28A745;
+            --text-main: #1A1A1A;
+            --text-muted: #6C757D;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #D6D6D6;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .app-shell {
+            width: 100%;
+            max-width: 414px;
+            height: 880px;
+            background-color: var(--bg-color);
+            border-radius: 40px;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            scrollbar-width: none;
+        }
+
+        /* --- Header Navigation --- */
+        .nav-header {
+            padding: 50px 24px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-dark);
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- Guide Hero Image --- */
+        .guide-hero {
+            width: 100%;
+            height: 380px;
+            position: relative;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 24px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* --- Content Area --- */
+        .booking-content {
+            background: var(--bg-color);
+            border-radius: 35px 35px 0 0;
+            margin-top: -35px;
+            position: relative;
+            padding: 30px 24px 120px;
+        }
+
+        .guide-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .guide-title h2 { font-size: 26px; color: var(--primary-dark); }
+        .guide-title p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+        .price-tag { text-align: right; }
+        .price-tag .amount { font-size: 22px; font-weight: 800; color: var(--primary-dark); }
+        .price-tag .unit { font-size: 12px; color: var(--text-muted); }
+
+        /* --- Info Pills --- */
+        .stats-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .stat-pill {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+            flex: 1;
+            text-align: center;
+        }
+        .stat-pill .val { display: block; font-weight: 800; color: var(--primary-dark); font-size: 14px; }
+        .stat-pill .lbl { display: block; font-size: 11px; color: var(--text-muted); }
+
+        /* --- About & Meeting Point --- */
+        .section-title { font-size: 16px; font-weight: 800; color: var(--primary-dark); margin-bottom: 12px; }
+        .description { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; }
+
+        .map-preview {
+            width: 100%;
+            height: 150px;
+            background: #e9ecef;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800');
+            background-size: cover;
+            position: relative;
+        }
+        .map-overlay {
+            background: var(--white);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* --- Fixed Bottom Booking Bar --- */
+        .bottom-action-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 20px 24px 40px;
+            display: flex;
+            gap: 15px;
+            border-top: 1px solid #eee;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+        }
+
+        .chat-secondary {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--primary-dark);
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .book-primary {
+            flex: 1;
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .book-primary:active { transform: scale(0.98); }
+
+    </style>
+</head>
+<body>
+
+<div class="app-shell">
+    <div class="nav-header">
+        <a href="index.html" class="back-btn">←</a>
+        <div class="back-btn">❤</div>
+    </div>
+
+    <div class="guide-hero">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800" class="hero-img" alt="Guide Profile">
+        <div class="verified-badge">✓ Verified Local Expert</div>
+    </div>
+
+    <div class="booking-content">
+        <div class="guide-title">
+            <div>
+                <h2>Ahmad Z.</h2>
+                <p>📍 Bukit Bintang, Kuala Lumpur</p>
+            </div>
+            <div class="price-tag">
+                <span class="amount">RM 85</span>
+                <span class="unit">/ hr</span>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-pill">
+                <span class="val">4.9 ⭐</span>
+                <span class="lbl">Rating</span>
+            </div>
+            <div class="stat-pill">
+                <span class="val">120+</span>
+                <span class="lbl">Trips</span>
+            </div>
+            <div class="stat-pill">
+                <span class="val">Malay, EN</span>
+                <span class="lbl">Languages</span>
+            </div>
+        </div>
+
+        <h3 class="section-title">About Your Guide</h3>
+        <p class="description">
+            Born and raised in the heart of KL. I specialize in hidden street food spots and the history of the Golden Triangle. Ready to meet you at the Pavilion entrance or your hotel lobby within 10 minutes.
+        </p>
+
+        <h3 class="section-title">Meeting Point</h3>
+        <div class="map-preview">
+            <div class="map-overlay">📍 Pavilion Mall Fountain</div>
+        </div>
+
+        <h3 class="section-title">Booking Type</h3>
+        <p class="description" style="color: var(--online-green); font-weight: 700;">⚡ On-Demand: Available to start immediately!</p>
+    </div>
+
+    <div class="bottom-action-bar">
+        <button class="chat-secondary">💬</button>
+        <button class="book-primary">START TOUR NOW</button>
+    </div>
+</div>
+
+</body>
+</html>
+
